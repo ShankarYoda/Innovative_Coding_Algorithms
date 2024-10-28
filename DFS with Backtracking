@@ -1,0 +1,24 @@
+def dfs_backtracking(maze, start, end, path=None):
+    if path is None:
+        path = []
+    
+    x, y = start
+    if start == end:
+        return path + [end]
+
+    if maze[x][y] == 1:  # 1 represents wall
+        return None
+
+    maze[x][y] = 1  # Mark as visited
+    path.append(start)
+
+    for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+        next_pos = (x + dx, y + dy)
+        result = dfs_backtracking(maze, next_pos, end, path)
+        if result is not None:
+            return result
+
+    path.pop()
+    return None
+
+#code contributed by Mohammad Aquib
